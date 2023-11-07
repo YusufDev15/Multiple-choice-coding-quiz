@@ -64,6 +64,14 @@ function clickQuestion() {
   }
 }
 
-
+//when the quiz ends the questions are hidden, the timer stops and displays the final score
+function quizEnd() {
+  clearInterval(timeId);
+  var endScreenEl = document.getElementById("end-screen");
+  endScreenEl.removeAttribute("class");
+  var finalScoreEl = document.getElementById("final-score");
+  finalScoreEl.textContent = time;
+  questionsEl.setAttribute("class", "hide");
+}
 
 // starQuizBtn.addEventListener("click", quizStart);
