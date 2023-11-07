@@ -26,10 +26,9 @@ function quizStart() {
 function getQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   var questionTitleEl = document.getElementById("question-title");
-  questionTitleEl.textContent = currentQuestion.choices.forEach(function (
-    option,
-    i
-  ) {
+  questionTitleEl.textContent = currentQuestion.question;
+  choicesEl.innerHTML = "";
+  currentQuestion.choices.forEach(function (option, i) {
     var optionBtn = document.createElement("button");
     optionBtn.setAttribute("value", option);
     optionBtn.textContent = i + 1 + ". " + option;
@@ -74,4 +73,13 @@ function quizEnd() {
   questionsEl.setAttribute("class", "hide");
 }
 
-// starQuizBtn.addEventListener("click", quizStart);
+//Stop the quiz if the timer reaches 0
+function ticker() {
+  time--;
+  timeEl.textContent = time;
+  if (time <= 0) {
+    quizEnd();
+  }
+}
+
+starQuizBtn.addEventListener("click", quizStart);
