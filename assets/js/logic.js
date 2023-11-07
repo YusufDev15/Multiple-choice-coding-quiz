@@ -9,3 +9,26 @@ var feedbackEl = document.querySelector("#feedback");
 
 //object for a quiz, which will have question objects
 var currentQuestionIndex = 0;
+var time = questions.length * 15;
+var timeId;
+
+//start of the quiz
+function quizStart() {
+  timeId = setInterval(ticker, 1000);
+  timeEl.textContent = time;
+  var startScreenEl = document.getElementById("start-screen");
+  startScreenEl.setAttribute("class", "hide");
+  questionsEl.removeAttribute("class");
+  getQuestion();
+}
+
+//looping through array of questions and answers to create a list of buttons 
+function getQuestions() {
+    var currentQuestion = questions[currentQuestionIndex];
+    var questionTitleEl = document.getElementById("question-title");
+    questionTitleEl.textContent = currentQuestion.choices.forEach(
+        function()
+    )
+}
+
+//function() {}
