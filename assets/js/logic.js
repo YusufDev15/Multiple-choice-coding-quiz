@@ -12,8 +12,18 @@ var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timeId;
 
+//start of the quiz
+function quizStart() {
+  timeId = setInterval(ticker, 1000);
+  timeEl.textContent = time;
+  var startScreenEl = document.getElementById("start-screen");
+  startScreenEl.setAttribute("class", "hide");
+  questionsEl.removeAttribute("class");
+  getQuestion();
+}
+
 //looping through array of questions and answers to create a list of buttons
-function getQuestions() {
+function getQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   var questionTitleEl = document.getElementById("question-title");
   questionTitleEl.textContent = currentQuestion.choices.forEach(function (
@@ -28,14 +38,32 @@ function getQuestions() {
   });
 }
 
-//start of the quiz
-function quizStart() {
-  timeId = setInterval(ticker, 1000);
-  timeEl.textContent = time;
-  var startScreenEl = document.getElementById("start-screen");
-  startScreenEl.setAttribute("class", "hide");
-  questionsEl.removeAttribute("class");
-  getQuestion();
+//checking for the right answer and deducting time off for the wrong answer
+function clickQuestion() {
+  if (this.value !== questions[currentQuestionIndex].answer) {
+    time -= 10;
+    if (time < 0) {
+      time = 0; //clearInterval()
+    }
+    timeEl.textContent = time;
+    feedbackEl.textContent = `Incorrect! The correct answer was ${questions[currentQuestionIndex].answer}.`;
+    feedbackEl.style.color = "red";
+  } else {
+    feedbackEl.textContent = "Correct!";
+    feedbackEl.style.color = "green";
+  }
+  feedbackEl.setAttribute("class", "feedback");
+  setTimeout(function () {
+    feedbackEl.setAttribute("class", "feedback hide");
+  }, 2000);
+  currentQuestionIndex++;
+  if (currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    getQuestion();
+  }
 }
 
 
+
+// starQuizBtn.addEventListener("click", quizStart);
