@@ -82,4 +82,24 @@ function ticker() {
   }
 }
 
-starQuizBtn.addEventListener("click", quizStart);
+//save users name and the score in the local storage
+function saveHighScore() {
+  var initials = initialsEl.value.trim();
+  if (initials !== "") {
+    var highScores =
+      JSON.parse(window.localStorage.getItem("highScores")) || [];
+    var latestScore = { score: time, initials: initials };
+    highScores.push(latestScore);
+    window.localStorage.setItem("highScores", JSON.stringify(highScores));
+    alert("Your score has been submitted");
+  }
+}
+
+function enter(event) {
+  if (event.key === "Enter") {
+    saveHighScore();
+    alert("Your score has been submitted");
+  }
+}
+
+// starQuizBtn.addEventListener("click", quizStart);
