@@ -12,4 +12,12 @@ function printHighScores() {
   });
 }
 
+//clears previous scores when the button is clicked
+function clearHighscores() {
+    window.localStorage.removeItem("highScores");
+    window.location.reload();
+  }
+  document.getElementById("clear").addEventListener("click", clearHighscores);
+  
+  printHighScores();
 

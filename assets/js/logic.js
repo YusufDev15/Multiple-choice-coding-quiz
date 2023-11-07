@@ -104,6 +104,7 @@ function enter(event) {
   }
 }
 
+//also could use an enter key if you want
 initialsEl.onkeyup = enter;
 
 //after you click submit, it saves the users score
