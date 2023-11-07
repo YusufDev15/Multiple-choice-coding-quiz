@@ -95,6 +95,8 @@ function saveHighScore() {
   }
 }
 
+
+//after you press enter it saves the users score
 function enter(event) {
   if (event.key === "Enter") {
     saveHighScore();
@@ -102,4 +104,10 @@ function enter(event) {
   }
 }
 
-// starQuizBtn.addEventListener("click", quizStart);
+initialsEl.onkeyup = enter;
+
+//after you click submit, it saves the users score
+submitBtn.addEventListener("click", saveHighScore);
+
+//starts quiz when you click the start button
+starQuizBtn.addEventListener("click", quizStart);
